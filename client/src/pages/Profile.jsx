@@ -1,50 +1,50 @@
-import {  useSelector } from "react-redux"
-import { useRef, useState, useEffect } from "react"
-import {getDownloadURL, getStorage, ref, uploadBytesResumable} from "firebase/storage"
-import { app } from "../firebase"
+import {  useSelector } from "react-redux";
+import { useRef, useState, useEffect } from "react";
+import {
+  getDownloadURL, 
+  getStorage, 
+  ref, 
+  uploadBytesResumable
+} from "firebase/storage";
+import { app } from "../firebase";
 export default function Profile() {
-  const fileRef = useRef(null)
-  const {currentUser}= useSelector((state) => state.user)
-  const [file, setFile] = useState(undefined)
+  const fileRef = useRef(null);
+  const {currentUser}= useSelector((state) => state.user);
+  const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
+  const [formData, setFormData] = useState({});
   
   //firebase storage
   //allow read;
   //allow write: if 
-  //request.resource.size < 2 * 1024 &&
+  //request.resource.size < 2 * 1024 * 1024 &&
   //request.resource.contentType.matches('image/.*')
 
   useEffect(() => { 
-    if(file) {
-      handleFileUpload();
+    if (file) {
+      handleFileUpload(file);
     }
-  },[file]);
+  }, [file]);
 
   const handleFileUpload = (file) => {
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
     const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef,file);
+    const uploadTask = uploadBytesResumable(storageRef, file);
 
-    uploadTask.on (
-    'state_changed',
-    (snapshot) => {
-      const progress = 
-        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    uploadTask.on ('state_changed',(snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       setFilePerc(Math.round(progress));
-    },
+    });
     (error)=> {
       setFileUploadError(true);
-    },
+    };
     ()=> {
-      getDownloadURL(uploadTask.snapshot.ref).then
-      ((downloadURL) => 
+      getDownloadURL(uploadTask.snapshot.ref).then ((downloadURL) => 
         setFormData({ ...formData, avatar: downloadURL })
-      );
-    }
-    );
-
+        );
+    };
   };
 
   return (
@@ -66,11 +66,9 @@ export default function Profile() {
         />
       <p className="text-sm self-center"> 
         {fileUploadError ?(
-        <span className='text-red-700'>Error Image upload(image must be less than 2mb)</span>
+        <span className='text-red-700'>Error Image upload(image must be less than 2 mb)</span> 
         ): filePerc > 0 && filePerc < 100 ? (
-          <span className="text-slate-700">
-            {`uploading ${filePerc}%`}
-            </span>
+          <span className="text-slate-700">{`uploading ${filePerc}%`}</span>
         ) : filePerc === 100 ? (
           <span className="text-green-700">Image successfuly uploaded!</span>
         ) : (
