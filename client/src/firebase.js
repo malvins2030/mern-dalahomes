@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "mern-dalahomes",
   storageBucket: "mern-dalahomes.appspot.com",
   messagingSenderId: "597898573761",
-  appId: "1:597898573761:web:6908d16e3fb781a73c2140"
+  appId: "1:597898573761:web:6908d16e3fb781a73c2140",
 };
 
 // Initialize Firebase

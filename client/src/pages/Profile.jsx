@@ -10,7 +10,10 @@ import { app } from "../firebase";
 import { 
   updateUserStart, 
   updateUserSuccess, 
-  updateUserFailure 
+  updateUserFailure, 
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 export default function Profile() {
@@ -87,6 +90,24 @@ export default function Profile() {
     }
   };
 
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`,{
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch (deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+      
+    }
+  };
   return (
     <div className="p-3 max-w-lg mx-auto"> 
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
@@ -100,10 +121,8 @@ export default function Profile() {
         />
       <img 
         onClick={() => fileRef.current.click()} 
-        src={formData.avatar || currentUser.avatar} 
-        alt="profile" 
-        className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
-        />
+        src={formData.avatar || currentUser.avatar} alt="profile" 
+        className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"/>
       <p className="text-sm self-center"> 
         {fileUploadError ?(
         <span className='text-red-700'>Error Image upload(image must be less than 2 mb)</span> 
@@ -125,17 +144,17 @@ export default function Profile() {
         onChange={handleChange}
         />
 
-      <input type="email" 
-        placeholder='email' 
-        defaultValue={currentUser.email}
-        id="email" 
+      <input type='email' 
+        placeholder='email'
+        id='email' 
+       defaultValue={currentUser.email} 
         className='border p-3 rounded-lg '
         onChange={handleChange}
         />
 
-      <input type="password" 
+      <input type='password' 
         placeholder='password' 
-        id="password" 
+        id='password' 
         className='border p-3 rounded-lg '
         onChange={handleChange}
         />
@@ -143,11 +162,16 @@ export default function Profile() {
       <button disabled={loading} className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"> {loading ? 'Loading...' : 'Update'}</button>
       </form>
       <div className="flex justify-between mt-5">
-        <span className="text-red-700 cursor-">Delete account</span>
-        <span className="text-red-700 cursor-">Sign out</span>
+        <span 
+        onClick={handleDeleteUser} 
+        className="text-red-700 cursor-pointer">Delete account</span>
+        <span className="text-red-700 cursor-pointer">Sign out</span>
       </div>
       <p className=" text-red-700 mt-5">{error ? error : ''}</p>
-      <p className="tex-green-700 mt-5">{updateSuccess ? 'User is updated succesfully!' : ''}</p>
+      <p className="tex-green-700 mt-5">{updateSuccess ? 'User is updated succesfully!' : ''}
+      </p>
       </div>
   );
 }
+
+
