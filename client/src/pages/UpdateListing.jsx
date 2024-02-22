@@ -1,4 +1,4 @@
-import { 
+import {
     getDownloadURL, 
     getStorage, 
     ref, 
@@ -44,11 +44,12 @@ import {
             return;
 
         }
+        setFormData(data);
         
       };
       fetchListing();
   
-    },[]);
+    }, []);
   
     const handleImageSubmit = (e) => {
        if (files.length > 0 && files.length + formData.imageUrls.length < 11){
