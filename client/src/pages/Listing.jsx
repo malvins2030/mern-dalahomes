@@ -9,10 +9,11 @@ import {
     FaBed,
     FaChair,
     FaMapMarkerAlt,
+    FaMapMarkedAlt,
     FaParking,
     FaShare,
   } from 'react-icons/fa';
-  import Contact from '../components/Contact';
+import Contact from '../components/Contact';
 import { useSelector } from 'react-redux';
 
 export default function Listing() {
