@@ -31,7 +31,10 @@ export default function About() {
       <p className='mb-4 text-slate-700'>
       Dala Homes, Where Every Step Leads You Home.
       </p>
+
+      
     </div>
   )
 }
+
 

@@ -50,17 +50,16 @@ export default function Home() {
       {/* top */}
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto'>
         <h1 className='text-slate-700 font-bold text-3xl lg:text-6xl'>
-          Find your next <span className='text-slate-500'>perfect</span>
+          Embark on effortless <span className='text-slate-500'>home</span>
           <br />
-          place with ease
+          search , with a single click.
         </h1>
         <div className='text-gray-400 text-xs sm:text-sm'>
         "Welcome to Dala Homes – Where Dreams Find a Home! 🏡
 
 At Dala Homes, we understand that finding the perfect property is not just about bricks and mortar; it's about turning your dreams into reality. Whether you're in search of a cozy starter home, a luxurious estate, or the ideal commercial space, you've come to the right place.
-
-Happy house hunting!
-The Dala Homes Team"
+Happy house hunting!"
+The Dala Homes Team
       <p>
           <br />
           We have a wide range of properties for you to choose from.

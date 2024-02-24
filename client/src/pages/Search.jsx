@@ -70,7 +70,8 @@ export default function Search() {
     if (
       e.target.id === 'all' ||
       e.target.id === 'rent' ||
-      e.target.id === 'sale'
+      e.target.id === 'sale' ||
+      e.target.id === 'airbnb'
     ) {
       setSidebardata({ ...sidebardata, type: e.target.id });
     }
@@ -175,6 +176,16 @@ export default function Search() {
                 checked={sidebardata.type === 'sale'}
               />
               <span>Sale</span>
+            </div>
+            <div className='flex gap-2'>
+              <input
+                type='checkbox'
+                id='airbnb'
+                className='w-5'
+                onChange={handleChange}
+                checked={sidebardata.type === 'airbnb'}
+              />
+              <span>AIR BNB</span>
             </div>
             <div className='flex gap-2'>
               <input

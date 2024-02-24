@@ -116,6 +116,7 @@ import {
     const handleChange = (e) => {
         if(
             e.target.id === 'sale' || 
+            e.target.id === 'airbnb' || 
             e.target.id === 'rent'
             ){
             setFormData({
@@ -224,30 +225,53 @@ import {
                         onChange={handleChange} 
                         checked={formData.type === 'sale'} 
                         />
-                        <span>Sell</span>
+                        <span>Sale</span>
                     </div>
                     <div className='flex gap-2'>
-                        <input type="checkbox"  id='rent' className='w-5' 
+                        <input 
+                        type="checkbox"  
+                        id='rent' 
+                        className='w-5' 
                         onChange={handleChange}
-                        checked={formData.type === "rent"}/>
+                        checked={formData.type === "rent"}
+                        />
                         <span>Rent</span>
                     </div>
                     <div className='flex gap-2'>
-                        <input type="checkbox"  id='parking' className='w-5'
+                        <input 
+                        type="checkbox"  
+                        id='parking' 
+                        className='w-5'
                         onChange={handleChange}
                         checked={formData.parking}
                         />
                         <span>Parking spot</span>
                     </div>
                     <div className='flex gap-2'>
-                        <input type="checkbox"  id='furnished' className='w-5'
+                        <input 
+                        type="checkbox"  
+                        id='airbnb' 
+                        className='w-5'
+                        onChange={handleChange}
+                        checked={formData.type === "airbnb"}
+                        />
+                        <span>AIR BNB</span>
+                    </div>
+                    <div className='flex gap-2'>
+                        <input 
+                        type="checkbox"  
+                        id='furnished' 
+                        className='w-5'
                         onChange={handleChange}
                         checked={formData.furnished}/>
                         <span>Furnished</span>
                     </div>
                     
                     <div className='flex gap-2'>
-                        <input type="checkbox"  id='offer' className='w-5'
+                        <input 
+                        type="checkbox"  
+                        id='offer' 
+                        className='w-5'
                         onChange={handleChange}
                         checked={formData.offer}/>
                         <span>Offer</span>
@@ -258,7 +282,7 @@ import {
                     <input 
                     type="number" 
                     id='bedrooms' 
-                    min='1' 
+                    min='0' 
                     max='10' 
                     required 
                     className='p-3 border border-gray-300 rounded-lg'
@@ -272,7 +296,7 @@ import {
                     <input 
                     type="number" 
                     id='bathrooms' 
-                    min='1' 
+                    min='0'
                     max='10' 
                     required className='p-3 border border-gray-300 rounded-lg'
                     onChange={handleChange}
@@ -284,7 +308,7 @@ import {
                     <input 
                     type="number" 
                     id='regularPrice' 
-                    min='1' 
+                    min='0' 
                     max='1000000000' 
                     required 
                     className='p-3 border border-gray-300 rounded-lg'
@@ -301,7 +325,7 @@ import {
                      <input 
                      type="number" 
                      id='discountPrice' 
-                     min='1' 
+                     min='0' 
                      max='1000000000' 
                      required 
                      className='p-3 border border-gray-300 rounded-lg'
